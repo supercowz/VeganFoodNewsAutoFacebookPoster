@@ -13,6 +13,7 @@ c = conn.cursor()
 #c.execute("INSERT INTO rss_feed_item (published_date, url, headline, is_posted) VALUES (1554923716, 'https://www.unixtimestamp.com/', 'This is the headline', 0)")
 
 c.execute('SELECT headline, url, published_date FROM rss_feed_item where is_posted = 0 order by published_date desc')
+#c.execute('update rss_feed_item set is_posted = 1 where is_posted = 0')
 #all_rows = c.fetchall()
 #print('1):', all_rows)
 
