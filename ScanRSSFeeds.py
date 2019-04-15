@@ -24,7 +24,7 @@ def saveToDatabase(entries):
 		
 		
 
-feeds = ["https://vegnews.com/feed.rss", "https://www.plantbasednews.org/post/rss.xml", "https://www.onegreenplanet.org/channel/vegan-food/feed/", "https://www.onegreenplanet.org/channel/vegan-food/news-and-trends/feed/", "https://www.livekindly.co/feed/", "http://cok.net/blog/category/veg-eating/feed/"]
+feeds = ["https://vegnews.com/feed.rss", "https://www.plantbasednews.org/post/rss.xml", "https://www.onegreenplanet.org/channel/vegan-food/feed/", "https://www.onegreenplanet.org/channel/vegan-food/news-and-trends/feed/", "https://www.livekindly.co/feed/", "http://cok.net/blog/feed/"]
 
 for feed in feeds:
 	d = feedparser.parse(feed)
