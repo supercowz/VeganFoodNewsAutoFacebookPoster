@@ -13,8 +13,6 @@
 </head>
 
 <body>
-	
-
 	<div class="container">
 		<div class="col-xs-12">
 		<button id="clearResults">Clear</button>
@@ -33,6 +31,12 @@
 			ini_set('display_errors', 'On');
 			$dir = 'sqlite:../vegan_food_news_links.sqlite';
 			$dbh  = new PDO($dir) or die("cannot open the database");
+			
+			if($_GET["clear"] && $_GET["clear"] == "1") {
+				$sql = "update rss_feed_item set is_posted = 1 where is_posted = 0";
+				$dbh->prepare($sql)->execute();
+			}
+			
 			$query =  "SELECT headline, url, published_date FROM rss_feed_item where is_posted = 0 order by published_date desc";
 			foreach ($dbh->query($query) as $row)
 			{
