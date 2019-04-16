@@ -1,5 +1,9 @@
 # VeganFoodNewsAutoFacebookPoster
 
+## Overview:
+
+TODO
+
 ## Install:
 
 1. To install the requirements to run the python scripts:
@@ -14,14 +18,11 @@
 
 ``` python ScanRSSFeeds.py ```
 
-4.  To mark the current items in the database as hidden: 
-
-``` python ```
-
 
 ## Other functions:
 
-- (To change the RSS Feeds, edit the ScanRSSFeeds.py file manually):
+- To change the RSS Feeds, edit the ScanRSSFeeds.py file manually
 
-``` python ```
+- To mark the current items in the database as hidden: 
 
+``` python hideactiveitems.py ```
