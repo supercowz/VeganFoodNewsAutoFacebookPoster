@@ -15,6 +15,7 @@
 <body>
 	<div class="container">
 		<div class="col-xs-12">
+		<button id="clearResults">Clear</button>
 		<h1>Potential Vegan Food News Posts</h1>
 		<br>
 		<br>
@@ -53,6 +54,10 @@
 			  integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="
 			  crossorigin="anonymous"></script>
   <script type="text/javascript">
+	$("#clearResults").click(function() {
+		window.location.href = "https://google.com/";
+	})  
+	  
 	$(".btnPost").click(function() {
 		var data = {headline: $(this).data("headline"), url: $(this).data("url")};
 		var url = "" //you must enter your post url....
