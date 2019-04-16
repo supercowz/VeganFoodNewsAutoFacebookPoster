@@ -13,6 +13,8 @@
 </head>
 
 <body>
+	
+
 	<div class="container">
 		<div class="col-xs-12">
 		<button id="clearResults">Clear</button>
@@ -55,7 +57,7 @@
 			  crossorigin="anonymous"></script>
   <script type="text/javascript">
 	$("#clearResults").click(function() {
-		window.location.href = "https://google.com/";
+		window.location.href = "?clear=1";
 	})  
 	  
 	$(".btnPost").click(function() {
