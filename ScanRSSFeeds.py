@@ -3,7 +3,7 @@ import sqlite3
 from dateutil.parser import parse
 import time
 
-sqlite_file = 'vegan_food_news_links.sqlite'
+sqlite_file = '/var/www/vegan_food_news_links.sqlite'
 
 
 def saveToDatabase(entries):
@@ -18,9 +18,9 @@ def saveToDatabase(entries):
 		published_date_unix = time.mktime(published_date.timetuple()) 
 		
 		c.execute("INSERT OR IGNORE INTO rss_feed_item (published_date, url, headline, is_posted) VALUES (?, ?, ?, 0)", (published_date_unix, link, headline.decode('utf-8')))
-		
 	conn.commit()
 	conn.close()
+	print("saved to database success")
 		
 		
 
