@@ -6,8 +6,8 @@ sqlite_file = 'vegan_food_news_links.sqlite'
 conn = sqlite3.connect(sqlite_file)
 c = conn.cursor()
 
-c.execute('CREATE TABLE calendar_event (uid TEXT PRIMARY KEY, organizer TEXT, date_start INTEGER, date_end INTEGER, summary TEXT, description TEXT)')
-c.execute('CREATE INDEX date_start_idx on calendar_event (date_start)')
+#c.execute('CREATE TABLE calendar_event (uid TEXT PRIMARY KEY, organizer TEXT, date_start INTEGER, date_end INTEGER, summary TEXT, description TEXT)')
+#c.execute('CREATE INDEX date_start_idx on calendar_event (date_start)')
 
 c.execute('SELECT uid, organizer, date_start, date_end, summary, description FROM calendar_event order by date_start desc')
 
