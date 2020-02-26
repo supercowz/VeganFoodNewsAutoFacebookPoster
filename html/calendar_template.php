@@ -42,8 +42,6 @@
 			$query =  "SELECT date_start, date_end, summary, description FROM calendar_event order by date_start desc limit 20";
 			foreach ($dbh->query($query) as $row)
 			{
-				$st = $row[2];
-				$dt = new DateTime("@$st"); 
 				echo '<tr>';
 				echo '<td>' . $row[0] . '</td>';
 				echo '<td>' . $row[1] . '</td>';
