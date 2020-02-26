@@ -21,7 +21,7 @@
 
 	<div class="container">
 		<div class="col-xs-12">
-		<h1>Potential Vegan Food News Posts</h1>
+		<h1>Facebook Calendar Parsing Testing</h1>
 		<br>
 		<br>
 		<table class="table">
