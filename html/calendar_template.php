@@ -45,8 +45,8 @@
 				$st = $row[2];
 				$dt = new DateTime("@$st"); 
 				echo '<tr>';
-				echo '<td>' .date("F d, Y", $row[0]) . '</td>';
-				echo '<td>' .date("F d, Y", $row[1]) . '</td>';
+				echo '<td>' . $row[0] . '</td>';
+				echo '<td>' . $row[1] . '</td>';
 				echo '<td>' . $row[2] . '</td>';
 				echo '<td>' . $row[3] . '</td>';
 				echo '</tr>';
