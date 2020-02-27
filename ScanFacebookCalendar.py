@@ -11,7 +11,7 @@ url = "https://www.facebook.com/events/ical/upcoming/?uid=100005885022646&key=21
 response = requests.get(url)
 
 gcal = Calendar.from_ical(response.text)
-events = []
+events = {}
 eastern = timezone('US/Eastern')
 for component in gcal.walk():
     if component.name == "VEVENT":
@@ -22,7 +22,11 @@ for component in gcal.walk():
 		summary = component.get('summary')
 		description = component.get('description')
 		
-		events.append({ 
+		dKey = date_start.dt.astimezone(eastern).strftime("%A, %B %d")
+		if (dKey not in events.keys()):
+			events[dKey] = []
+
+		events[dKey].append({ 
         	"date_start": date_start.dt.astimezone(eastern).strftime("%A, %B %d"),
             "date_end": date_end.dt.astimezone(eastern).strftime("%A, %B %d"),
 			"time_start": date_start.dt.astimezone(eastern).strftime("%H:%M:00"),
