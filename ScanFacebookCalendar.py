@@ -1,27 +1,37 @@
-import requests
-import sqlite3
 from icalendar import Calendar
+from datetime import datetime
+from pytz import timezone
 
-url = ""
+import requests
+import json
+import os
+
+url = "https://www.facebook.com/events/ical/upcoming/?uid=100005885022646&key=219ODd1jNxGCrqhc"
 
 response = requests.get(url)
-#print(response.text.encode('utf-8', 'ignore'))
-
-sqlite_file = '/var/www/vegan_food_news_links.sqlite'
-conn = sqlite3.connect(sqlite_file)
-c = conn.cursor()
 
 gcal = Calendar.from_ical(response.text)
+events = []
+eastern = timezone('US/Eastern')
 for component in gcal.walk():
     if component.name == "VEVENT":
 		uid = component.get('uid')
 		organzier = component.get('organizer')
-		date_start = component.get('dtstart').dt
-		date_end = component.get('dtend').dt
+		date_start = component.get('dtstart')
+		date_end = component.get('dtend')
 		summary = component.get('summary')
 		description = component.get('description')
 		
-		c.execute("REPLACE INTO calendar_event (uid, organizer, date_start, date_end, summary, description) VALUES (?, ?, ?, ?, ?, ?)", (uid,organzier,date_start,date_end,summary,description))
+		events.append({ 
+        	"date_start": date_start.dt.astimezone(eastern).strftime("%A, %B %d"),
+            "date_end": date_end.dt.astimezone(eastern).strftime("%A, %B %d"),
+			"time_start": date_start.dt.astimezone(eastern).strftime("%H:%M:00"),
+            "time_end": date_end.dt.astimezone(eastern).strftime("%H:%M:00"),
+            "summary": summary,
+            "description": description
+        })
 
-conn.commit()
-conn.close()
+with open("html/vegan_calendar.json", "w") as write_file:
+    json.dump(events, write_file)
+
+os.chmod("html/vegan_calendar.json", 0o644)
