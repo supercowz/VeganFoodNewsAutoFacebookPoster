@@ -12,7 +12,7 @@ eastern = timezone('US/Eastern')
 
 class Event:
     def __init__(self, date_start, date_end, summary, description):
-        self.fulldate = date_start.dt
+        self.fulldate = date_start.dt.astimezone(eastern)
         self.date_start = date_start.dt.astimezone(eastern).strftime("%A, %B %d")
         self.date_end = date_end.dt.astimezone(eastern).strftime("%A, %B %d")
         self.time_start = date_start.dt.astimezone(eastern).strftime("%H:%M:00")
