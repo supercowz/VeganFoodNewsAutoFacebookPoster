@@ -1,7 +1,6 @@
 from icalendar import Calendar
 from datetime import *
 from pytz import timezone
-from collections import OrderedDict
 
 import requests
 import json
@@ -9,10 +8,12 @@ import os
 
 # Set the timezone we are going to use
 eastern = timezone('US/Eastern')
+utc = timezone('UTC')
 
 class Event:
     def __init__(self, date_start, date_end, summary, description):
-        self.fulldate = date_start.dt.astimezone(eastern)
+        self.fullstartdate = date_start.dt.astimezone(eastern)
+        self.fullenddate = date_end.dt.astimezone(eastern)
         self.date_start = date_start.dt.astimezone(eastern).strftime("%A, %B %d")
         self.date_end = date_end.dt.astimezone(eastern).strftime("%A, %B %d")
         self.time_start = date_start.dt.astimezone(eastern).strftime("%H:%M:00")
@@ -23,10 +24,12 @@ class Event:
 # We don't want to include events that have already occured.
 def removePastEvents(events):
     eventsToReturn = []
+    today = utc.localize(datetime.now())
     for event in events:
-        if (event.fulldate.date() >= date.today()):
+        if ((event.fullenddate) >= today):
             eventsToReturn.append(event)
-
+        else:
+            print(str(event.fullenddate) + " :::: " +  str(today))
     return eventsToReturn
 
 # Take a sorted list of class=Event and group it by day and convert it to JSON.
@@ -76,7 +79,7 @@ def main():
     events = removePastEvents(events)
 
     # sort the events by the full date descending
-    events = sorted(events, key=lambda o: o.fulldate)
+    events = sorted(events, key=lambda o: o.fullstartdate)
 
     # group the events by day and convert to JSON
     #jsonGroupedEvents = getEventsInJSONGroupedByDay(events)
